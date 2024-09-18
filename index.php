@@ -40,10 +40,24 @@ class Product
     }
 }
 
+class Toy extends Product
+{
+    public $material; // Materiale del giocattolo
 
+    public function __construct($name, $price, Category $category, $material)
+    {
+        parent::__construct($name, $price, $category);
+        $this->material = $material;
+    }
 
+    public function getDetails()
+    {
+        return parent::getDetails() . ", Materiale: {$this->material}";
+    }
+}
 
-
+$catToy = new Toy('Gioco per Gatti', 10, $catCategory, 'Plastica');
+var_dump($catToy)
 
 ?>
 
