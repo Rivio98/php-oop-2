@@ -12,6 +12,38 @@ class Category
         $this->icon = $icon;
     }
 }
+//creazione di categorie
+$dogCategory = new Category('Cani', '<i class="fa-solid fa-dog"></i>');
+$catCategory = new Category('Gatti', '<i class="fa-solid fa-cat"></i>');
+
+var_dump($dogCategory);
+
+// Costruttore per inizializzare nome, prezzo e categoria
+class Product
+{
+    public $name;
+    public $price;
+    public $category;
+
+    // Costruttore per inizializzare nome, prezzo e categoria
+    public function __construct($name, $price, Category $category)
+    {
+        $this->name = $name;
+        $this->price = $price;
+        $this->category = $category;
+    }
+
+    // Metodo per ottenere i dettagli del prodotto
+    public function getDetails()
+    {
+        return "Nome: {$this->name}, Prezzo: {$this->price}€, Categoria: {$this->category->name}";
+    }
+}
+
+
+
+
+
 
 ?>
 
