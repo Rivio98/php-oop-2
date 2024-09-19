@@ -11,29 +11,43 @@
 </head>
 
 <body>
-
     <div class="container mt-5">
         <div class="row">
             <?php
             require_once 'includes/products.php';
+
             foreach ($products as $product) {
-                $details = $product->getDetails();
+                try {
+                    $details = $product->getDetails();
             ?>
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <img src="img/<?php echo $details['image']; ?>" class="card-img-top" alt="<?php echo $details['title']; ?>">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $details['title']; ?></h5>
-                            <p class="card-text">Prezzo: €<?php echo number_format($details['price'], 2); ?></p>
-                            <p class="card-text">
-                                <i class="fas <?php echo $details['category']->getIcon(); ?>"></i>
-                                Categoria: <?php echo $details['category']->getName(); ?>
-                            </p>
-                            <p class="card-text">Tipo: <?php echo $details['type']; ?></p>
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <?php if (!empty($details['image'])): ?>
+                                <img src="img/<?php echo $details['image']; ?>" class="card-img-top" alt="<?php echo htmlspecialchars($details['title']); ?>">
+                            <?php else: ?>
+                                <img src="img/default.jpg" class="card-img-top" alt="Immagine non disponibile">
+                            <?php endif; ?>
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo htmlspecialchars($details['title']); ?></h5>
+                                <p class="card-text">Prezzo: €<?php echo number_format($details['price'], 2); ?></p>
+                                <p class="card-text">
+                                    <i class="fas <?php echo htmlspecialchars($details['category']->getIcon()); ?>"></i>
+                                    Categoria: <?php echo htmlspecialchars($details['category']->getName()); ?>
+                                </p>
+                                <p class="card-text">Tipo: <?php echo htmlspecialchars($details['type']); ?></p>
+                            </div>
                         </div>
                     </div>
-                </div>
             <?php
+                } catch (Exception $e) {
+                    echo '<div class="col-md-4">';
+                    echo '<div class="card mb-4 shadow-sm">';
+                    echo '<img src="img/default.jpg" class="card-img-top" alt="Immagine non disponibile">';
+                    echo '<div class="card-body">';
+                    echo '<h5 class="card-title">Prodotto non disponibile</h5>';
+                    echo '<p class="card-text">Errore: ' . htmlspecialchars($e->getMessage()) . '</p>';
+                    echo '</div></div></div>';
+                }
             }
             ?>
         </div>

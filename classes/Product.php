@@ -21,6 +21,10 @@ class Product
     // Metodo per ottenere i dettagli del prodotto
     public function getDetails()
     {
+        if (empty($this->image)) {
+            throw new Exception('Immagine prodotto mancante');
+        }
+
         return [
             'title' => $this->title,
             'price' => $this->price,

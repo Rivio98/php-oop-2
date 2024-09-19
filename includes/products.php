@@ -14,6 +14,7 @@ $catCategory = new Category("Gatti", "fa-cat");
 $dogFood = new Food("Crocchette per Cani", 19.99, "dog-food.jpg", $dogCategory);
 $catToy = new Toy("Gioco per Gatti", 9.99, "cat-toy.jpg", $catCategory);
 $dogBed = new Bed("Cuccia per Cani", 29.99, "dog-bed.jpg", $dogCategory);
+$dogToy = new Bed("Cuccia per Cani", 29.99, "", $dogCategory);
 
 // Array di prodotti
-$products = [$dogFood, $catToy, $dogBed];
+$products = [$dogFood, $catToy, $dogBed, $dogToy];
